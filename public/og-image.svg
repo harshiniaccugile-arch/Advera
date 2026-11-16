@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="lgrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6A3D"/>
+      <stop offset="100%" stop-color="#FF3E85"/>
+    </linearGradient>
+    <radialGradient id="bg-radial" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#18151D"/>
+      <stop offset="100%" stop-color="#0B0B0E"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg-radial)"/>
+
+  <!-- Brand Symbol -->
+  <g transform="translate(600, 240)">
+    <g transform="translate(-80, -80) scale(6.666)">
+      <path d="M0 24A24 24 0 0 1 24 0V24Z" fill="#F2F1EF"/>
+      <circle cx="4.6" cy="4.6" r="3.2" fill="url(#lgrad)"/>
+    </g>
+  </g>
+
+  <!-- Brand Name -->
+  <text x="600" y="435" text-anchor="middle" fill="#FFFFFF" font-family="Instrument Sans, system-ui, -apple-system, sans-serif" font-size="64" font-weight="600" letter-spacing="-1.5">
+    Advera<tspan font-weight="400" fill="#A8A4B0" dx="14">Branding</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="490" text-anchor="middle" fill="#8B8796" font-family="Instrument Sans, system-ui, -apple-system, sans-serif" font-size="24" font-weight="400" letter-spacing="2">
+    BRANDING · UGC CONTENT · WEB DESIGN
+  </text>
+</svg>
+

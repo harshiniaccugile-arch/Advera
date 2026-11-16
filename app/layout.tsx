@@ -9,6 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://adverabranding.com"),
   title: "Advera Branding | Branding and UGC Content Studio",
   description:
     "Advera Branding is a brand and content studio. We build identities and websites, and produce UGC and social content with real creators so your brand is remembered and believed.",
@@ -37,12 +38,31 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Advera Branding",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Advera Branding Logo and Identity",
+      },
+      {
+        url: "/logo.svg",
+        width: 512,
+        height: 512,
+        alt: "Advera Branding Emblem",
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Advera Branding | Branding and UGC Content Studio",
     description:
       "We build identities and websites, and produce UGC and social content with real creators so your brand is remembered and believed.",
+    images: ["/og-image.svg"],
+  },
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
   },
   robots: {
     index: true,

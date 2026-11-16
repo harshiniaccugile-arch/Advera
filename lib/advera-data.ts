@@ -487,11 +487,11 @@ const UGC_STEPS = [
 ];
 
 const UGC_CLIPS = [
-  { t: 'Unboxing', d: 'First impressions, packaging and the moment it arrives.', hook: 'Wait, look inside', img: '/chunks/Opening%20a%20Chunkz%20Chocolate%20Pouch.png', pal: ['#FFD9C2', '#241A2E', '#FF6A3D'], seed: 11 },
-  { t: 'Honest review', d: 'A real person explains what they like and what they would change.', hook: 'I did not expect this', img: '/glumi/glumi/Glumi%20Pink%20Gummy%20Supplement%20Set.png', pal: ['#FFF3E4', '#241A2E', '#FF3E85'], seed: 12 },
-  { t: 'Get ready with me', d: 'Your product inside a daily routine, filmed the way people really use it.', hook: 'My morning routine', img: '/nilave/nilave/NILAV%C3%89%20Skincare%20Beach%20Tote.png', pal: ['#FFC857', '#241A2E', '#FFF3E4'], seed: 13 },
-  { t: 'Problem and solution', d: 'A relatable problem, then how your product fixes it.', hook: 'Why I switched', img: '/pawlish/pawlish/Golden%20Retriever%20with%20Pawlish%20Grooming%20Essentials.png', pal: ['#BFE3C9', '#241A2E', '#1F6F4D'], seed: 14 },
-  { t: 'Day 30 update', d: 'Results and routines after a month of real use.', hook: '30 days in', img: '/teddy%20creamery/Teddy%20Creamery%20Branding%20Close-Up%20(1).png', pal: ['#CFE0FF', '#241A2E', '#FF3E85'], seed: 15 }
+  { t: 'Unboxing', d: 'First impressions, packaging and the moment it arrives.', hook: 'Wait, look inside', img: '/ugc/ugc-chunks.jpg', pal: ['#FFD9C2', '#241A2E', '#FF6A3D'], seed: 11 },
+  { t: 'Honest review', d: 'A real person explains what they like and what they would change.', hook: 'I did not expect this', img: '/ugc/ugc-glumi.png', pal: ['#FFF3E4', '#241A2E', '#FF3E85'], seed: 12 },
+  { t: 'Get ready with me', d: 'Your product inside a daily routine, filmed the way people really use it.', hook: 'My morning routine', img: '/ugc/ugc-nilave.jpg', pal: ['#FFC857', '#241A2E', '#FFF3E4'], seed: 13 },
+  { t: 'Problem and solution', d: 'A relatable problem, then how your product fixes it.', hook: 'Why I switched', img: '/ugc/ugc-pawlish.jpg', pal: ['#BFE3C9', '#241A2E', '#1F6F4D'], seed: 14 },
+  { t: 'Editorial lookbook', d: 'High-fashion creator styling and luxury unboxing aesthetic.', hook: 'Timeless luxury', img: '/ugc/ugc-maison-eclat.jpg', pal: ['#CFE0FF', '#241A2E', '#FF3E85'], seed: 15 }
 ];
 const WALL_PALS = [['#FFD9C2', '#241A2E', '#FF6A3D'], ['#FFF3E4', '#241A2E', '#FF3E85'], ['#BFE3C9', '#241A2E', '#1F6F4D'], ['#F2C9A0', '#241A2E', '#B94A20'], ['#CFE0FF', '#241A2E', '#5B6FD8'], ['#FFC857', '#241A2E', '#FFF3E4']];
 const HOOKS = ['Wait, look inside', 'I did not expect this', 'My morning routine', 'Why I switched', '30 days in', 'Honest review', 'Before and after', 'Worth the hype?'];
