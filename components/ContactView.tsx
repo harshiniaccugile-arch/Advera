@@ -1,16 +1,41 @@
 // @ts-nocheck
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SITE, rightsSectionHTML } from '@/lib/advera-data';
 import { submitForm } from '@/lib/submit-form';
 
 export default function ContactView() {
   const needs = ['Brand identity', 'UGC content', 'Social media', 'Paid ads', 'Website', 'Something else'];
+  const [selectedNeeds, setSelectedNeeds] = useState<string[]>([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const [clock, setClock] = useState('--:--');
   const [copied, setCopied] = useState(false);
   const [sending, setSending] = useState(false);
   const [statusMsg, setStatusMsg] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const toggleNeed = (n: string) => {
+    setSelectedNeeds(prev =>
+      prev.includes(n) ? prev.filter(item => item !== n) : [...prev, n]
+    );
+  };
+
+  const removeNeed = (n: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedNeeds(prev => prev.filter(item => item !== n));
+  };
 
   useEffect(() => {
     try {
@@ -52,6 +77,7 @@ export default function ContactView() {
 
     if (result.ok) {
       form.reset();
+      setSelectedNeeds([]);
       setStatusMsg({
         type: 'ok',
         text: 'Thank you! Your enquiry has been sent. We will get back to you soon.'
@@ -139,17 +165,76 @@ export default function ContactView() {
               <input id="f-co" name="company" type="text" autoComplete="organization" placeholder="Acme Studio" />
             </div>
 
-            <fieldset className="field">
-              <legend>What can we help you build?</legend>
-              <div className="checks">
-                {needs.map(n => (
-                  <label className="check" key={n}>
-                    <input type="checkbox" name="need" value={n} />
-                    <span>{n}</span>
-                  </label>
-                ))}
+            <div className="field">
+              <label id="needs-label">What can we help you build? <span className="muted">(select all that apply)</span></label>
+              
+              {/* Hidden inputs so FormData receives each selected need */}
+              {selectedNeeds.map(n => (
+                <input key={n} type="hidden" name="need" value={n} />
+              ))}
+
+              <div className={`multiselect-dropdown ${dropdownOpen ? 'is-open' : ''}`} ref={dropdownRef}>
+                <button
+                  type="button"
+                  className="multiselect-trigger"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  aria-haspopup="listbox"
+                  aria-expanded={dropdownOpen}
+                  aria-labelledby="needs-label"
+                >
+                  <div className="multiselect-value-wrap">
+                    {selectedNeeds.length === 0 ? (
+                      <span className="multiselect-placeholder">Choose services (e.g. Brand identity, Website...)</span>
+                    ) : (
+                      selectedNeeds.map(n => (
+                        <span key={n} className="multiselect-badge">
+                          {n}
+                          <span
+                            role="button"
+                            tabIndex={0}
+                            className="multiselect-badge-remove"
+                            onClick={(e) => removeNeed(n, e)}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); removeNeed(n, e as any); } }}
+                            aria-label={`Remove ${n}`}
+                          >
+                            ×
+                          </span>
+                        </span>
+                      ))
+                    )}
+                  </div>
+                  <svg className="multiselect-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                {dropdownOpen && (
+                  <div className="multiselect-menu" role="listbox" aria-multiselectable="true">
+                    {needs.map(n => {
+                      const isSelected = selectedNeeds.includes(n);
+                      return (
+                        <div
+                          key={n}
+                          role="option"
+                          aria-selected={isSelected}
+                          className={`multiselect-option ${isSelected ? 'is-selected' : ''}`}
+                          onClick={() => toggleNeed(n)}
+                        >
+                          <div className="multiselect-checkbox-box">
+                            {isSelected && (
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                              </svg>
+                            )}
+                          </div>
+                          <span>{n}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            </fieldset>
+            </div>
 
             <div className="field">
               <label htmlFor="f-budget">Rough budget or timeline <span className="muted">(optional)</span></label>
