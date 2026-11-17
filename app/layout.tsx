@@ -79,9 +79,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeInitScript = `
+    (function() {
+      var DARK_START = 18, DARK_END = 6;
+      function wantsDark() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return false;
+        var h = new Date().getHours();
+        return h >= DARK_START || h < DARK_END;
+      }
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', wantsDark() ? 'dark' : 'light');
+      }
+      applyTheme();
+      if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+          mq.addEventListener('change', applyTheme);
+        } else if (mq.addListener) {
+          mq.addListener(applyTheme);
+        }
+      }
+    })();
+  `;
+
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

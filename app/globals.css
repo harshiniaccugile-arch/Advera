@@ -3,27 +3,27 @@
 
 /* ---------- Tokens ---------- */
 :root {
-  --ink: #0B0B0E;
-  --paper: #F2F1EF;
-  --bg: #0B0B0E;
-  --fg: #F2F1EF;
-  --muted: #9B98A3;
-  --line: rgba(242, 241, 239, .14);
-  --surface: #141317;
-  --panel: #000000;
-  --panel-fg: #F2F1EF;
-  --panel-muted: #9B98A3;
-  --panel-line: rgba(255, 255, 255, .13);
-  --coral: #FF4B3E;
-  --pink: #FF4B3E;
-  --gold: #FF4B3E;
-  --mint: #6C6974;
-  --sky: #6C6974;
-  --grad: #FF4B3E;
-  --num: #FF4B3E;
-  --focus: #FF4B3E;
-  --edge-top: var(--bg);
-  --f-display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --ink: #241A2E;
+  --paper: #FFF8EF;
+  --bg: #FFF8EF;
+  --fg: #241A2E;
+  --muted: #75667A;
+  --line: rgba(36, 26, 46, .13);
+  --surface: #FFFFFF;
+  --panel: #241A2E;
+  --panel-fg: #FFF3E4;
+  --panel-muted: #BFAFC4;
+  --panel-line: rgba(255, 243, 228, .16);
+  --coral: #FF6A3D;
+  --pink: #FF3E85;
+  --gold: #FFC857;
+  --mint: #BFE3C9;
+  --sky: #CFE0FF;
+  --grad: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+  --num: #FF6A3D;
+  --focus: #FF3E85;
+  --edge-top: var(--coral);
+  --f-display: 'Fraunces', 'Georgia', serif;
   --f-body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
   --pad: clamp(20px, 4vw, 56px);
   --max: 1360px;
@@ -31,7 +31,7 @@
   --fs-h1: clamp(2.8rem, 7.4vw, 7.2rem);
   --fs-h2: clamp(2.1rem, 4.8vw, 4.4rem);
   --fs-h3: clamp(1.35rem, 2.1vw, 1.8rem);
-  color-scheme: dark;
+  color-scheme: light;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -2830,53 +2830,54 @@ body {
   color: var(--fg);
 }
 
-.soft {
-  background: #141317 !important;
+/* Theme adaptations for dark mode */
+[data-theme="dark"] .soft {
+  background: #141317;
 }
 
-.warm {
-  background: linear-gradient(180deg, #18171C, #0B0B0E) !important;
+[data-theme="dark"] .warm {
+  background: linear-gradient(180deg, #18171C, #0B0B0E);
 }
 
-.card-body h3 {
+[data-theme="dark"] .card-body h3 {
   color: #F2F1EF;
 }
 
-.fchip {
+[data-theme="dark"] .fchip {
   background: #141317;
   color: var(--fg);
   border: 1.5px solid var(--line);
 }
 
-.fchip[aria-pressed="true"] {
+[data-theme="dark"] .fchip[aria-pressed="true"] {
   background: #F2F1EF;
   color: #0B0B0E;
   border-color: #F2F1EF;
 }
 
-.sfchip {
+[data-theme="dark"] .sfchip {
   background: #141317;
   color: var(--fg);
   border: 1.5px solid var(--line);
 }
 
-.sfchip[aria-pressed="true"] {
+[data-theme="dark"] .sfchip[aria-pressed="true"] {
   background: #FF4B3E;
   color: #ffffff;
   border-color: #FF4B3E;
 }
 
-.hdr:not(.scrolled) {
-  --bg: transparent;
-}
-
-.lead-card {
+[data-theme="dark"] .lead-card {
   background: #141317;
   border: 1px solid var(--line);
 }
 
-.model-row {
+[data-theme="dark"] .model-row {
   border-bottom: 1px solid var(--line);
+}
+
+.hdr:not(.scrolled) {
+  --bg: transparent;
 }
 
 /* 2-Column Alternating Masonry Grid for Works */
