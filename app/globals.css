@@ -1789,7 +1789,9 @@ button {
   align-items: end;
   border-top: 1px solid var(--line);
   padding-top: clamp(28px, 4vw, 40px);
-  margin-top: clamp(28px, 4vw, 40px)
+  padding-bottom: clamp(28px, 4vw, 40px);
+  margin-top: clamp(28px, 4vw, 40px);
+  margin-bottom: clamp(28px, 4vw, 40px);
 }
 
 .ftr-news h4 {
