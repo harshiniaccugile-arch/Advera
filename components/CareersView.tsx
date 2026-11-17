@@ -3,9 +3,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { SITE, ROLES, C, emblem, trustHTML, stepsHTML, statsHTML } from '@/lib/advera-data';
+import CareerApplySlider from '@/components/CareerApplySlider';
 
 export default function CareersView() {
   const [openRoleIndex, setOpenRoleIndex] = useState<number | null>(null);
+  const [selectedRoleForApply, setSelectedRoleForApply] = useState<{ title: string; onHold?: boolean } | null>(null);
 
   const perks = [
     ['Work where you work best', 'Remote-friendly by default, with flexible hours built around delivering great work.', ['circle', C.accent, C.brand, 0]],
@@ -135,12 +137,13 @@ export default function CareersView() {
                         </ul>
                       </div>
                       <div className="apply">
-                        <a
+                        <button
+                          type="button"
                           className="btn"
-                          href={`mailto:${SITE.careersEmail}?subject=${encodeURIComponent('Application: ' + r.t)}`}
+                          onClick={() => setSelectedRoleForApply({ title: r.t, onHold: false })}
                         >
                           Apply for this role
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -166,15 +169,24 @@ export default function CareersView() {
         <div className="wrap">
           <h2>Do not see your role? Tell us what you do best.</h2>
           <div className="row-links">
-            <a
+            <button
+              type="button"
               className="btn"
-              href={`mailto:${SITE.careersEmail}?subject=${encodeURIComponent('Open application')}`}
+              onClick={() => setSelectedRoleForApply({ title: 'Open Application (General)', onHold: false })}
             >
               Send an open application
-            </a>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Slider Application Drawer */}
+      <CareerApplySlider
+        isOpen={Boolean(selectedRoleForApply)}
+        roleTitle={selectedRoleForApply?.title || ''}
+        isHold={Boolean(selectedRoleForApply?.onHold)}
+        onClose={() => setSelectedRoleForApply(null)}
+      />
     </>
   );
 }

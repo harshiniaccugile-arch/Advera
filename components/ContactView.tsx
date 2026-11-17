@@ -3,11 +3,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { SITE, rightsSectionHTML } from '@/lib/advera-data';
+import { submitForm } from '@/lib/submit-form';
 
 export default function ContactView() {
   const needs = ['Brand identity', 'UGC content', 'Social media', 'Paid ads', 'Website', 'Something else'];
   const [clock, setClock] = useState('--:--');
   const [copied, setCopied] = useState(false);
+  const [sending, setSending] = useState(false);
   const [statusMsg, setStatusMsg] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function ContactView() {
       update();
       const interval = setInterval(update, 15000);
       return () => clearInterval(interval);
-    } catch (_) {}
+    } catch (_) { }
   }, []);
 
   const copyEmail = async () => {
@@ -35,29 +37,31 @@ export default function ContactView() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    const fd = new FormData(form);
-    const data = {
-      name: fd.get('name'),
-      email: fd.get('email'),
-      company: fd.get('company') || '',
-      needs: fd.getAll('need'),
-      budget: fd.get('budget') || '',
-      message: fd.get('message')
-    };
 
-    const body = `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\nNeeds: ${data.needs.join(', ')}\nBudget and timeline: ${data.budget}\n\n${data.message}`;
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent('New project enquiry from ' + data.name)}&body=${encodeURIComponent(body)}`;
-    setStatusMsg({
-      type: 'ok',
-      text: `Your email app should open with your message ready to send. If it does not, write to ${SITE.email}.`
-    });
+    setSending(true);
+    setStatusMsg(null);
+    const result = await submitForm('/api/contact', form);
+    setSending(false);
+
+    if (result.ok) {
+      form.reset();
+      setStatusMsg({
+        type: 'ok',
+        text: 'Thank you! Your enquiry has been sent. We will get back to you soon.'
+      });
+    } else {
+      setStatusMsg({
+        type: 'err',
+        text: result.error || `Something went wrong. Please email us at ${SITE.email}.`
+      });
+    }
   };
 
   return (
@@ -157,7 +161,9 @@ export default function ContactView() {
               <textarea id="f-msg" name="message" rows={5} required placeholder="Where is your brand today, and where do you want it to be?"></textarea>
             </div>
 
-            <button className="btn" type="submit" style={{ width: '100%', marginTop: '8px' }}>Send enquiry</button>
+            <button className="btn" type="submit" disabled={sending} style={{ width: '100%', marginTop: '8px' }}>
+              {sending ? 'Sending...' : 'Send enquiry'}
+            </button>
             {statusMsg && (
               <p className={`form-status ${statusMsg.type}`} role="status" aria-live="polite">
                 {statusMsg.text}
@@ -173,4 +179,3 @@ export default function ContactView() {
     </>
   );
 }
-

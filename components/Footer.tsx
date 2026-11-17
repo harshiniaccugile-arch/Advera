@@ -85,6 +85,11 @@ export default function Footer() {
         </div>
         <div className="ftr-legal">
           <span>&copy; 2026 {SITE.name}. All rights reserved.</span>
+          <div className="ftr-legal-links" style={{ display: 'inline-flex', gap: '16px' }}>
+            <a href="/policies/privacy-policy">Privacy Policy</a>
+            <a href="/policies/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/policies/cookies-policy">Cookies Policy</a>
+          </div>
           <a href="#top" onClick={scrollToTop}>Back to top</a>
         </div>
       </div>
