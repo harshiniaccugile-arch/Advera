@@ -2271,7 +2271,13 @@ button {
 .field input::placeholder,
 .field textarea::placeholder {
   color: var(--muted);
-  opacity: .7
+  opacity: .7;
+  transition: opacity 0.2s ease
+}
+
+.field input:focus::placeholder,
+.field textarea:focus::placeholder {
+  opacity: 0
 }
 
 .field input:focus,
@@ -2409,10 +2415,11 @@ button {
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: var(--surface);
+  background: var(--bg);
+  color: var(--fg);
   border: 1px solid var(--line);
   border-radius: 10px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
   z-index: 50;
   padding: 6px;
   display: flex;
@@ -2423,15 +2430,9 @@ button {
   animation: dropIn 0.18s ease-out;
 }
 
-@keyframes dropIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.panel .multiselect-menu {
+  background: var(--panel);
+  border-color: var(--panel-line);
 }
 
 .multiselect-option {
@@ -2442,20 +2443,28 @@ button {
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.98rem;
-  color: var(--fg);
+  color: var(--fg) !important;
   user-select: none;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
+.panel .multiselect-option {
+  color: var(--panel-fg) !important;
+}
+
+.multiselect-option span {
+  color: inherit;
+}
+
 .multiselect-option:hover {
-  background: rgba(255, 106, 61, 0.08);
-  color: var(--coral);
+  background: rgba(255, 106, 61, 0.15);
+  color: var(--coral) !important;
 }
 
 .multiselect-option.is-selected {
   font-weight: 600;
-  background: rgba(255, 106, 61, 0.12);
-  color: var(--coral);
+  background: rgba(255, 106, 61, 0.2);
+  color: var(--coral) !important;
 }
 
 .multiselect-checkbox-box {
@@ -2466,9 +2475,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
+  background: var(--surface);
   transition: all 0.15s ease;
   flex-shrink: 0;
+}
+
+.panel .multiselect-checkbox-box {
+  border-color: var(--panel-line);
+  background: rgba(255, 243, 228, 0.08);
 }
 
 .multiselect-option.is-selected .multiselect-checkbox-box {
@@ -3107,6 +3121,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -3133,6 +3148,7 @@ body {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -3877,6 +3893,7 @@ body {
     transform: scale(0.95);
     opacity: 0.6;
   }
+
   100% {
     transform: scale(1.15);
     opacity: 1;
@@ -3925,9 +3942,12 @@ body {
 }
 
 @keyframes badgeFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -3974,10 +3994,13 @@ body {
 }
 
 @keyframes pulseDot {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.9;
   }
+
   50% {
     transform: scale(1.4);
     opacity: 0.5;

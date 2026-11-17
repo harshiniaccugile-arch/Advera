@@ -41,6 +41,7 @@ export default async function PolicyPage({ params }: Props) {
                 </header>
 
                 <div className="pol-layout">
+
                     <aside className="pol-sidebar">
                         <div className="pol-nav-card">
                             <p className="pol-nav-label">All policies</p>

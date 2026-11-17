@@ -38,10 +38,10 @@ export default function Footer() {
             <p>A short, occasional email on brand and UGC work we're proud of. No spam, unsubscribe any time.</p>
           </div>
           <form id="news-form" onSubmit={handleSubscribe}>
-            <input 
-              type="email" 
-              placeholder="you@company.com" 
-              aria-label="Email address" 
+            <input
+              type="email"
+              placeholder="you@company.com"
+              aria-label="Email address"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="ftr-legal">
-          <span>&copy; 2026 {SITE.name}. All rights reserved.</span>
+          <span>&copy; 2027 {SITE.name}. All rights reserved.</span>
           <div className="ftr-legal-links" style={{ display: 'inline-flex', gap: '16px' }}>
             <a href="/policies/privacy-policy">Privacy Policy</a>
             <a href="/policies/terms-and-conditions">Terms &amp; Conditions</a>

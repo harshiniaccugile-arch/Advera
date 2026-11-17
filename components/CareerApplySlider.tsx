@@ -69,6 +69,10 @@ export default function CareerApplySlider({
     }));
   };
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 

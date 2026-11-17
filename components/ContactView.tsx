@@ -52,6 +52,10 @@ export default function ContactView() {
     } catch (_) { }
   }, []);
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.target.select();
+  };
+
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(SITE.email);
@@ -152,17 +156,17 @@ export default function ContactView() {
             <div className="two">
               <div className="field">
                 <label htmlFor="f-name">Your name</label>
-                <input id="f-name" name="name" type="text" autoComplete="name" required placeholder="Jane Doe" />
+                <input id="f-name" name="name" type="text" autoComplete="name" required placeholder="Jane Doe" onFocus={handleFocus} />
               </div>
               <div className="field">
                 <label htmlFor="f-email">Email address</label>
-                <input id="f-email" name="email" type="email" autoComplete="email" required placeholder="jane@company.com" />
+                <input id="f-email" name="email" type="email" autoComplete="email" required placeholder="jane@company.com" onFocus={handleFocus} />
               </div>
             </div>
 
             <div className="field">
               <label htmlFor="f-co">Company or brand name <span className="muted">(optional)</span></label>
-              <input id="f-co" name="company" type="text" autoComplete="organization" placeholder="Acme Studio" />
+              <input id="f-co" name="company" type="text" autoComplete="organization" placeholder="Acme Studio" onFocus={handleFocus} />
             </div>
 
             <div className="field">
@@ -238,12 +242,12 @@ export default function ContactView() {
 
             <div className="field">
               <label htmlFor="f-budget">Rough budget or timeline <span className="muted">(optional)</span></label>
-              <input id="f-budget" name="budget" type="text" placeholder="e.g. ₹3-5L / launch in June" />
+              <input id="f-budget" name="budget" type="text" placeholder="e.g. ₹3-5L / launch in June" onFocus={handleFocus} />
             </div>
 
             <div className="field">
               <label htmlFor="f-msg">Tell us about your project</label>
-              <textarea id="f-msg" name="message" rows={5} required placeholder="Where is your brand today, and where do you want it to be?"></textarea>
+              <textarea id="f-msg" name="message" rows={5} required placeholder="Where is your brand today, and where do you want it to be?" onFocus={handleFocus}></textarea>
             </div>
 
             <button className="btn" type="submit" disabled={sending} style={{ width: '100%', marginTop: '8px' }}>
